@@ -1,9 +1,8 @@
 import 'package:blink_to_live/modules/forget_password_email/forget_password_email_screen.dart';
+import 'package:blink_to_live/modules/signup/signup_screen.dart';
 import 'package:blink_to_live/shared/components/components.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 class SignInScreen extends StatelessWidget {
   const SignInScreen({Key? key}) : super(key: key);
 
@@ -93,7 +92,9 @@ class SignInScreen extends StatelessWidget {
                                   fontSize: 17,
                                   fontWeight: FontWeight.bold),
                             ),
-                            onTap: () {})
+                            onTap: () {
+                              navigateTo(context,SignUpScreen());
+                            })
                       ],
                     ),
                     SizedBox(

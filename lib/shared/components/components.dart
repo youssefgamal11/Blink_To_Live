@@ -28,18 +28,15 @@ Widget defaultTextFormField({ String? hintText , IconData ? icon}){
 
 }
 
-Widget defaultAuthButton({required String buttonName}){
-  return  InkWell(
-    onTap:(){},
-    child: Container(
-      width: double.infinity,
-      height: 47,
-      decoration: BoxDecoration(
-          color: Color(0xff3E83FC) ,
-          borderRadius: BorderRadius.circular(10)
-      ),
-      child: Center(child: Text(buttonName , style: TextStyle(fontFamily: 'Segoe' , color: Colors.white,fontSize: 17),)),
+Widget defaultAuthButton({required String buttonName, function}){
+  return  Container(
+    width: double.infinity,
+    height: 47,
+    decoration: BoxDecoration(
+        color: Color(0xff3E83FC) ,
+        borderRadius: BorderRadius.circular(10)
     ),
+    child: Center(child: Text(buttonName , style: TextStyle(fontFamily: 'Segoe' , color: Colors.white,fontSize: 17),)),
   );
 
 }
