@@ -28,18 +28,15 @@ Widget defaultTextFormField({ String? hintText , IconData ? icon}){
 
 }
 
-Widget defaultAuthButton({required String buttonName}){
-  return  InkWell(
-    onTap:(){},
-    child: Container(
-      width: double.infinity,
-      height: 47,
-      decoration: BoxDecoration(
-          color: Color(0xff3E83FC) ,
-          borderRadius: BorderRadius.circular(10)
-      ),
-      child: Center(child: Text(buttonName , style: TextStyle(fontFamily: 'Segoe' , color: Colors.white,fontSize: 17),)),
+Widget defaultAuthButton({required String buttonName, function}){
+  return  Container(
+    width: double.infinity,
+    height: 47,
+    decoration: BoxDecoration(
+        color: Color(0xff3E83FC) ,
+        borderRadius: BorderRadius.circular(10)
     ),
+    child: Center(child: Text(buttonName , style: TextStyle(fontFamily: 'Segoe' , color: Colors.white,fontSize: 17),)),
   );
 
 }
@@ -48,7 +45,7 @@ navigateTo( context , widget){
   Navigator.push(context, MaterialPageRoute(builder: (context)=>widget));
 }
 
-Widget socialMediaButton({required IconData icon}){
+Widget socialMediaButton({required String asset}){
   return InkWell(
     onTap: (){},
     child: Stack(children: [
@@ -58,7 +55,9 @@ Widget socialMediaButton({required IconData icon}){
         child: CircleAvatar(
           radius: 25,
           backgroundColor: Colors.white,
-          child:Icon(icon),
+          child: Image(
+              width: 20,
+              image: AssetImage(asset)),
         ),
       ),
     ],),

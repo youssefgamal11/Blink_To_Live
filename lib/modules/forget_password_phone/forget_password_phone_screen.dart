@@ -21,9 +21,10 @@ class ForgetPasswordPhoneScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Image(
-                  image: AssetImage('assets/Finally-without-shadow-or-txt.png'),
-                  width: 150,
+                  image: AssetImage('assets/Finally-without-shadow 2.png'),
+                  width: 110,
                   height: 80),
+              SizedBox(height: 15),
               Text(
                 'Verify Your Account',
                 style: TextStyle(
