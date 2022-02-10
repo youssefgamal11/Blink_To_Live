@@ -18,9 +18,10 @@ class VerifyScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Image(
-                  image: AssetImage('assets/Finally-without-shadow-or-txt.png'),
-                  width: 150,
+                  image: AssetImage('assets/Finally-without-shadow 2.png'),
+                  width: 110,
                   height: 80),
+              SizedBox(height: 15),
               Text(
                 'Verify Your Account',
                 style: TextStyle(
@@ -28,7 +29,7 @@ class VerifyScreen extends StatelessWidget {
                     fontSize: 17,
                     fontWeight: FontWeight.bold),
               ), SizedBox(
-                height: 15,
+                height: 20,
               ),
               Text(
                 'Enter the 4 digit pin that we sent to :',
@@ -70,7 +71,7 @@ class VerifyScreen extends StatelessWidget {
                   ),
                   onTap: () {
                   }),
-            SizedBox(height: 200.0,),
+            SizedBox(height: 100.0,),
               defaultAuthButton(buttonName: 'Verify')
             ],
           ),

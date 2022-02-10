@@ -45,7 +45,7 @@ navigateTo( context , widget){
   Navigator.push(context, MaterialPageRoute(builder: (context)=>widget));
 }
 
-Widget socialMediaButton({required IconData icon}){
+Widget socialMediaButton({required String asset}){
   return InkWell(
     onTap: (){},
     child: Stack(children: [
@@ -55,7 +55,9 @@ Widget socialMediaButton({required IconData icon}){
         child: CircleAvatar(
           radius: 25,
           backgroundColor: Colors.white,
-          child:Icon(icon),
+          child: Image(
+              width: 20,
+              image: AssetImage(asset)),
         ),
       ),
     ],),
