@@ -56,13 +56,15 @@ class SignUpScreen extends StatelessWidget {
                     defaultTextFormField(hintText: 'your birthday',icon: Icons.calendar_today_outlined),
                     SizedBox(height: 10),
                     Container(
-                      height: 68,
+                      height: 80,
                       child: IntlPhoneField(
+
                         decoration: InputDecoration(
                               filled: true,
                           fillColor: Colors.white,
                           labelText: 'Phone Number',
                           border: OutlineInputBorder(
+                            borderSide: BorderSide(),
                             borderRadius:BorderRadius.circular(15),
                           ),
                         ),
