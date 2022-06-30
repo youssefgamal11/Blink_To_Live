@@ -1,9 +1,10 @@
-import 'package:blink_to_live/modules/dealing_with_model/view.dart';
+import 'package:blink_to_live/modules/dealing_with_model/dealing_with_model_screen.dart';
 import 'package:blink_to_live/modules/signin/signin_screen.dart';
+import 'package:blink_to_live/modules/teach_patient/teach_patient_screen.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
-import 'modules/choices/view.dart';
+import 'modules/choices/choices_screen.dart';
 
 List<CameraDescription>? cameras;
 Future<void> main() async {
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: DealingWithModelScreen(),
+      home: TeachPatientScreen(),
     );
   }
 }

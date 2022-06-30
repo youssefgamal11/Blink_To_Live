@@ -12,7 +12,7 @@ import '../../main.dart';
 
 class DealingWithModelScreen extends StatefulWidget {
   WebSocketChannel channel = IOWebSocketChannel.connect(
-      "ws://ec2-18-220-85-67.us-east-2.compute.amazonaws.com:8080/blink-to-live"
+      "ws://ec2-18-220-177-248.us-east-2.compute.amazonaws.com:8080/blink-to-live"
       // "ws://192.168.88.91:8080/ws",
       );
   @override
@@ -48,7 +48,7 @@ class _HomePageState extends State<DealingWithModelScreen> {
         return;
       }
       cameraController!.startImageStream((CameraImage img) {
-        Timer timer = Timer.periodic(const Duration(seconds: 5), (timer) {
+        Timer timer = Timer.periodic(const Duration(seconds: 3), (timer) {
           setState(() {
             cameraImage = img;
             ourImageArray = img.planes[0].bytes;
@@ -91,10 +91,12 @@ class _HomePageState extends State<DealingWithModelScreen> {
                         child: Container(
                           color: Colors.red,
                           height: 270,
-                          width: 360,
-                          child: Icon(
-                            Icons.photo_camera_front,
-                            color: Colors.blue,
+                          width: double.infinity,
+                          child: Image(
+                            image: AssetImage(
+                              'assets/patient.jpeg',
+                            ),
+                            fit: BoxFit.fill,
                           ),
                         ),
                       )
@@ -113,8 +115,7 @@ class _HomePageState extends State<DealingWithModelScreen> {
                         onPressed: () {
                           _scaffoldKey.currentState!.openDrawer();
                         },
-                        icon: Icon(Icons.add_alarm,
-                            color: Colors.white, size: 20)),
+                        icon: Icon(Icons.menu, color: Colors.white, size: 25)),
                   ),
                 ),
               ],
@@ -134,6 +135,11 @@ class _HomePageState extends State<DealingWithModelScreen> {
                 ),
               ],
             ),
+            // TextButton(
+            //     onPressed: () {
+            //       widget.channel.sink.close();
+            //     },
+            //     child: Text('Stop')),
             StreamBuilder(
               stream: widget.channel.stream,
               builder: (context, snapshot) {
