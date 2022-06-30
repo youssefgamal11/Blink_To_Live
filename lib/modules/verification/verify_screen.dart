@@ -1,7 +1,16 @@
+import 'package:blink_to_live/modules/signin/signin_screen.dart';
 import 'package:blink_to_live/shared/components/components.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 class VerifyScreen extends StatelessWidget {
+
+  VerifyScreen({required this.verificationId,required this.resendToken,required this.phoneNumber});
+String verificationId;
+ int resendToken;
+ String phoneNumber;
+ String ?optc;
+FirebaseAuth auth=FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,14 +48,15 @@ class VerifyScreen extends StatelessWidget {
                 height: 4,
               ),
               Text(
-                '+0000000000',
+                '$phoneNumber',
                 style: TextStyle(fontFamily: 'Segoe', fontSize: 19,fontWeight: FontWeight.bold),
               ),
               SizedBox(
                 height: 25,
               ),
               PinCodeTextField(
-                length: 4,
+                enablePinAutofill: true,
+                length: 6,
                 obscureText: false,
                 hintCharacter: '*',
                 keyboardType: TextInputType.phone,
@@ -56,9 +66,12 @@ class VerifyScreen extends StatelessWidget {
                   shape: PinCodeFieldShape.box,
                   borderRadius: BorderRadius.circular(10.0),
                   fieldHeight: 50,
-                  fieldWidth: 60,
+                  fieldWidth: 45,
                   activeFillColor: Colors.white,
-                ), onChanged:(v){}, appContext:context,
+                ), onChanged:(value){
+                       optc=value;
+                       print(optc);
+              }, appContext:context,
 
               ),
               GestureDetector(
@@ -72,7 +85,13 @@ class VerifyScreen extends StatelessWidget {
                   onTap: () {
                   }),
             SizedBox(height: 100.0,),
-              defaultAuthButton(buttonName: 'Verify')
+              InkWell(child: defaultAuthButton(buttonName: 'Verify',),onTap: ()async{
+                PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: verificationId, smsCode: optc!);
+                await auth.signInWithCredential(credential);
+                if(auth.currentUser!=null){
+                  navigateTo(context,SignInScreen());
+                  }
+              },)
             ],
           ),
         ),

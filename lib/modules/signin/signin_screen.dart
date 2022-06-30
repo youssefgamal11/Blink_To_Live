@@ -78,7 +78,7 @@ class SignInScreen extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            'don\'t have account?  ',
+                            'Don\'t have account?  ',
                             style: TextStyle(
                                 color: Color(0xff3E83FC),
                                 fontFamily: 'Segoe',
