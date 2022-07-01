@@ -14,6 +14,7 @@ class SignUpScreen extends StatelessWidget {
   String countryCode = "+20";
   @override
   Widget build(BuildContext context) {
+
     return BlocProvider(
       create: (context) => SignUpCubit()..saveGoogleCurrentUer(),
       child: BlocConsumer<SignUpCubit, SignUpCubitStates>(

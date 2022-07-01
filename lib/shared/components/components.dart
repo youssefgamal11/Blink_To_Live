@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+
 Widget defaultTextFormField({ String? hintText , IconData ? icon,controller,String? Function(String?)?  validator}){
   return  Container(
     height: 70,
@@ -21,25 +22,26 @@ Widget defaultTextFormField({ String? hintText , IconData ? icon,controller,Stri
       ),
     ),
   );
-
 }
 
-Widget defaultAuthButton({required String buttonName, function}){
-  return  Container(
+Widget defaultAuthButton({required String buttonName, function}) {
+  return Container(
     width: double.infinity,
     height: 47,
     decoration: BoxDecoration(
-        color: Color(0xff3E83FC) ,
-        borderRadius: BorderRadius.circular(10)
-    ),
-    child: Center(child: Text(buttonName , style: TextStyle(fontFamily: 'Segoe' , color: Colors.white,fontSize: 17),)),
+        color: Color(0xff3E83FC), borderRadius: BorderRadius.circular(10)),
+    child: Center(
+        child: Text(
+      buttonName,
+      style: TextStyle(fontFamily: 'Segoe', color: Colors.white, fontSize: 17),
+    )),
   );
-
 }
 
-navigateTo( context , widget){
-  Navigator.push(context, MaterialPageRoute(builder: (context)=>widget));
+navigateTo(context, widget) {
+  Navigator.push(context, MaterialPageRoute(builder: (context) => widget));
 }
+
 
 Widget socialMediaButton({required String asset,}){
   return Stack(children: [
