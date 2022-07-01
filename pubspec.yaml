@@ -30,7 +30,13 @@ dependencies:
   cupertino_icons: ^1.0.2
   intl_phone_field: ^2.1.0
   pin_code_fields: ^7.3.0
-
+  country_code_picker: ^2.0.2
+  firebase_core: ^1.18.0
+  firebase_auth: ^3.3.20
+  bloc: ^8.0.3
+  flutter_bloc: ^8.0.1
+  flutter_facebook_auth: ^4.3.4+2
+  google_sign_in: ^5.3.3
 
 dev_dependencies:
   flutter_test:
