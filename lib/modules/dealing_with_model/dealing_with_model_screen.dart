@@ -11,10 +11,7 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 import '../../main.dart';
 
 class DealingWithModelScreen extends StatefulWidget {
-  WebSocketChannel channel = IOWebSocketChannel.connect(
-      "ws://ec2-18-220-177-248.us-east-2.compute.amazonaws.com:8080/blink-to-live"
-      // "ws://192.168.88.91:8080/ws",
-      );
+ 
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -28,7 +25,10 @@ class _HomePageState extends State<DealingWithModelScreen> {
   var ourImageArray;
   var parsedJson;
   var bytes;
-
+ WebSocketChannel channel = IOWebSocketChannel.connect(
+      "ws://ec2-18-220-177-248.us-east-2.compute.amazonaws.com:8080/blink-to-live"
+      // "ws://192.168.88.91:8080/ws",
+      );
   @override
   void initState() {
     super.initState();
@@ -36,7 +36,7 @@ class _HomePageState extends State<DealingWithModelScreen> {
 
   @override
   void dispose() {
-    widget.channel.sink.close();
+    channel.sink.close();
     super.dispose();
   }
 
@@ -52,7 +52,7 @@ class _HomePageState extends State<DealingWithModelScreen> {
           setState(() {
             cameraImage = img;
             ourImageArray = img.planes[0].bytes;
-            widget.channel.sink.add(ourImageArray);
+            channel.sink.add(ourImageArray);
           });
         });
       });
@@ -67,95 +67,93 @@ class _HomePageState extends State<DealingWithModelScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Stack(
-              children: [
-                Container(
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 180.0),
-                    child: Center(
-                        child: Text(
-                      'What the patient say show here',
-                      style: TextStyle(color: Colors.white, fontSize: 18),
-                    )),
-                  ),
-                  color: Color(0xff3E83FC),
-                  height: 550,
-                  width: double.infinity,
+      body: Column(
+        children: [
+          Stack(
+            children: [
+              Container(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 180.0),
+                  child: Center(
+                      child: Text(
+                    'What the patient say show here',
+                    style: TextStyle(color: Colors.white, fontSize: 18),
+                  )),
                 ),
-                cameraImage == null
-                    ? ClipPath(
-                        clipper: CustomClipPath(),
-                        child: Container(
-                          color: Colors.red,
-                          height: 270,
-                          width: double.infinity,
-                          child: Image(
-                            image: AssetImage(
-                              'assets/patient.jpeg',
-                            ),
-                            fit: BoxFit.fill,
+                color: Color(0xff3E83FC),
+                height: 550,
+                width: double.infinity,
+              ),
+              cameraImage == null
+                  ? ClipPath(
+                      clipper: CustomClipPath(),
+                      child: Container(
+                        color: Colors.red,
+                        height: 270,
+                        width: double.infinity,
+                        child: Image(
+                          image: AssetImage(
+                            'assets/patient.jpg',
                           ),
-                        ),
-                      )
-                    : ClipPath(
-                        clipper: CustomClipPath(),
-                        child: AspectRatio(
-                          aspectRatio: cameraController!.value.aspectRatio,
-                          child: CameraPreview(cameraController!),
+                          fit: BoxFit.fill,
                         ),
                       ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0, top: 18),
-                  child: Align(
-                    alignment: Alignment.topLeft,
-                    child: IconButton(
-                        onPressed: () {
-                          _scaffoldKey.currentState!.openDrawer();
-                        },
-                        icon: Icon(Icons.menu, color: Colors.white, size: 25)),
-                  ),
+                    )
+                  : ClipPath(
+                      clipper: CustomClipPath(),
+                      child: AspectRatio(
+                        aspectRatio: cameraController!.value.aspectRatio,
+                        child: CameraPreview(cameraController!),
+                      ),
+                    ),
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0, top: 18),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: IconButton(
+                      onPressed: () {
+                        _scaffoldKey.currentState!.openDrawer();
+                      },
+                      icon: Icon(Icons.menu, color: Colors.white, size: 25)),
                 ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: 20,
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(
+                width: 20,
+              ),
+              Text(
+                'Movements',
+                style: TextStyle(
+                    color: Color(0xff959595),
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500),
+              ),
+            ],
+          ),
+          // TextButton(
+          //     onPressed: () {
+          //       widget.channel.sink.close();
+          //     },
+          //     child: Text('Stop')),
+          StreamBuilder(
+            stream: channel.stream,
+            builder: (context, snapshot) {
+              print(
+                  "##############################${snapshot.data.toString()}############################");
+              return Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Text(
+                  getFaceMove(snapshot),
+                  style: const TextStyle(color: Colors.black),
                 ),
-                Text(
-                  'Movements',
-                  style: TextStyle(
-                      color: Color(0xff959595),
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500),
-                ),
-              ],
-            ),
-            // TextButton(
-            //     onPressed: () {
-            //       widget.channel.sink.close();
-            //     },
-            //     child: Text('Stop')),
-            StreamBuilder(
-              stream: widget.channel.stream,
-              builder: (context, snapshot) {
-                print(
-                    "##############################${snapshot.data.toString()}############################");
-                return Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Text(
-                    getFaceMove(snapshot),
-                    style: const TextStyle(color: Colors.black),
-                  ),
-                );
-              },
-            )
-          ],
-        ),
+              );
+            },
+          )
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

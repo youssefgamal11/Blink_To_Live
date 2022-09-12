@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../../shared/components/components.dart';
+import '../dealing_with_model/dealing_with_model_screen.dart';
+import '../teach_patient/teach_patient_screen.dart';
+
 class ChoicesScreen extends StatelessWidget {
   const ChoicesScreen({Key? key}) : super(key: key);
 
@@ -18,7 +22,7 @@ class ChoicesScreen extends StatelessWidget {
                   padding: EdgeInsets.only(left: 70.0),
                   child: InkWell(
                     onTap: () {
-                      print('hiiiii');
+                      navigateTo(context, TeachPatientScreen());
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(bottom: 25.0),
@@ -67,7 +71,7 @@ class ChoicesScreen extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              print('siiiii');
+             navigateTo(context, DealingWithModelScreen());
             },
             child: Padding(
               padding: const EdgeInsets.only(top: 28.0),

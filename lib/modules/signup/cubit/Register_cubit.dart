@@ -1,4 +1,3 @@
-import 'package:blink_to_live/modules/signin/signin_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,6 +5,7 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../shared/components/components.dart';
+import '../../choices/choices_screen.dart';
 import '../../verification/verify_screen.dart';
 import 'Register_states.dart';
 class SignUpCubit extends Cubit<SignUpCubitStates> {
@@ -37,7 +37,7 @@ class SignUpCubit extends Cubit<SignUpCubitStates> {
 
     });
   }
-  void signUpWithFaceBook()
+  void signUpWithFaceBook(context)
   {
     emit(SignUpLoadingFacebookCubitState());
 
@@ -46,9 +46,11 @@ class SignUpCubit extends Cubit<SignUpCubitStates> {
       'email'
     ]).then((value) {
     emit(SignUpSuccessfulFacebookCubitState());
+    navigateTo(context, ChoicesScreen());
   })
       .catchError((error){
     emit(SignUpErrorFacebookCubitState());
+
 
   });
   }
@@ -68,6 +70,7 @@ class SignUpCubit extends Cubit<SignUpCubitStates> {
          .then((value) {
        ScaffoldMessenger.of(context).showSnackBar(snackBarShow('You have successfully logged in${value?.email}'));
        emit(SignUpGoogleSuccessfulCubitState());
+       navigateTo(context, ChoicesScreen());
      })
          .catchError((error){
        emit(SignUpGoogleErrorCubitState());

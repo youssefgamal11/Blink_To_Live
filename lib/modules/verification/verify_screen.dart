@@ -3,6 +3,8 @@ import 'package:blink_to_live/shared/components/components.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+
+import '../choices/choices_screen.dart';
 class VerifyScreen extends StatelessWidget {
 
   VerifyScreen({required this.verificationId,required this.resendToken,required this.phoneNumber});
@@ -89,7 +91,7 @@ FirebaseAuth auth=FirebaseAuth.instance;
                 PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: verificationId, smsCode: optc!);
                 await auth.signInWithCredential(credential);
                 if(auth.currentUser!=null){
-                  navigateTo(context,SignInScreen());
+                  navigateTo(context,ChoicesScreen());
                   }
               },)
             ],

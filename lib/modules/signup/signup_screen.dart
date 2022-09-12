@@ -121,7 +121,7 @@ class SignUpScreen extends StatelessWidget {
                                       : socialMediaButton(
                                           asset: 'assets/facebook.png'),
                                   onTap: () async {
-                                    cubit.signUpWithFaceBook();
+                                    cubit.signUpWithFaceBook(context);
                                   },
                                 ),
                                 SizedBox(
